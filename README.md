@@ -1,8 +1,14 @@
-# Fixed Coming Soon Upload
+# J.A. Tech Coming Soon
 
-เวอร์ชันนี้วางรูปภาพไว้ในหน้าหลักของ Repository เพื่อป้องกันปัญหาโฟลเดอร์ assets อัปโหลดไม่ครบ
+ไฟล์พร้อมอัปโหลดเข้า GitHub
 
-อัปโหลด 3 ไฟล์นี้ไว้ระดับเดียวกัน:
+## อัปโหลดไฟล์ทั้งสองไว้ในระดับเดียวกัน
 - index.html
-- styles.css
-- coming-soon-background.png
+- background.png
+
+## ขั้นตอน
+1. เข้า Repository `jat-en-website`
+2. กด Add file > Upload files
+3. อัปโหลด `index.html` และ `background.png`
+4. กด Commit changes
+5. รอ Vercel Deploy อัตโนมัติ
