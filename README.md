@@ -1,11 +1,17 @@
-# J.A. Tech Entaneer — Coming Soon
+# J.A. Tech Coming Soon — Image Background Version
 
-หน้า Coming Soon แบบ Responsive รองรับคอมพิวเตอร์ แท็บเล็ต และโทรศัพท์มือถือ
+เวอร์ชันนี้ใช้ภาพงานออกแบบเป็นพื้นหลัง/ภาพหลักเต็มหน้า เพื่อให้หน้าตาใกล้กับภาพต้นแบบมากที่สุด
+
+## รองรับ
+- คอมพิวเตอร์
+- แท็บเล็ต
+- โทรศัพท์มือถือ
+- ปุ่มโทรศัพท์และอีเมลบนมือถือ
 
 ## ไฟล์
 - `index.html`
 - `styles.css`
-- `assets/ja-logo.jpg`
+- `assets/coming-soon-background.png`
 
 ## วิธีอัปโหลดเข้า GitHub
 1. แตกไฟล์ ZIP
@@ -13,12 +19,7 @@
 3. กด `Add file` > `Upload files`
 4. อัปโหลด `index.html`, `styles.css` และโฟลเดอร์ `assets`
 5. กด `Commit changes`
-6. Vercel จะ Deploy เว็บไซต์ให้อัตโนมัติ
+6. Vercel จะ Deploy ให้อัตโนมัติ
 
-## ข้อมูลบนหน้า
-- Sintered Filter
-- Filter Housing
-- Basket Strainer
-- Engineering Solutions
-- Installation Work
-- โทร. 065-528-1599
+## หมายเหตุ
+ข้อความส่วนใหญ่ถูกออกแบบอยู่ในรูปภาพแล้ว จึงดูเหมือนภาพต้นแบบมากที่สุด
