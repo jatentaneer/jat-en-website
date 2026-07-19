@@ -1,14 +1,24 @@
-# J.A. Tech Coming Soon
+# J.A. Tech Entaneer — Coming Soon
 
-ไฟล์สำหรับอัปโหลดขึ้น GitHub และ Vercel
+หน้า Coming Soon แบบ Responsive รองรับคอมพิวเตอร์ แท็บเล็ต และโทรศัพท์มือถือ
 
 ## ไฟล์
-- index.html
-- styles.css
+- `index.html`
+- `styles.css`
+- `assets/ja-logo.jpg`
 
-## วิธีอัปโหลด
-1. เข้า GitHub Repository `jat-en-website`
-2. ลบหรือแทนที่ไฟล์เดิม `index.html` และ `styles.css`
-3. อัปโหลดไฟล์ชุดนี้
-4. กด Commit changes
-5. Vercel จะอัปเดตเว็บไซต์อัตโนมัติ
+## วิธีอัปโหลดเข้า GitHub
+1. แตกไฟล์ ZIP
+2. เข้า Repository `jat-en-website`
+3. กด `Add file` > `Upload files`
+4. อัปโหลด `index.html`, `styles.css` และโฟลเดอร์ `assets`
+5. กด `Commit changes`
+6. Vercel จะ Deploy เว็บไซต์ให้อัตโนมัติ
+
+## ข้อมูลบนหน้า
+- Sintered Filter
+- Filter Housing
+- Basket Strainer
+- Engineering Solutions
+- Installation Work
+- โทร. 065-528-1599

@@ -3,39 +3,90 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="เว็บไซต์อย่างเป็นทางการของ J.A. Tech Entaneer Co., Ltd. กำลังอยู่ระหว่างการพัฒนา" />
+  <meta name="description" content="J.A. Tech Entaneer Co., Ltd. — เว็บไซต์กำลังอยู่ระหว่างการพัฒนา" />
+  <meta name="theme-color" content="#0b3767" />
   <title>J.A. Tech Entaneer | Coming Soon</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <main class="page">
-    <section class="card">
-      <div class="logo">JA</div>
+  <main class="page-shell">
+    <section class="coming-soon" aria-labelledby="main-title">
+      <div class="blueprint blueprint-left" aria-hidden="true"></div>
+      <div class="blueprint blueprint-right" aria-hidden="true"></div>
 
-      <p class="company">J.A. TECH ENTANEER CO., LTD.</p>
+      <div class="content">
+        <img
+          src="assets/ja-logo.jpg"
+          alt="J.A. Tech Entaneer logo"
+          class="logo"
+        />
 
-      <h1>COMING SOON</h1>
+        <p class="company-name">J.A. TECH ENTANEER CO., LTD.</p>
 
-      <h2>เว็บไซต์กำลังอยู่ระหว่างการพัฒนา</h2>
+        <div class="separator" aria-hidden="true"></div>
 
-      <p class="intro">
-        เรากำลังจัดเตรียมเว็บไซต์อย่างเป็นทางการ
-        เพื่อให้ข้อมูลผลิตภัณฑ์และบริการของเราได้อย่างครบถ้วน
-      </p>
+        <h1 id="main-title">COMING SOON</h1>
 
-      <div class="services">
-        <span>Sintered Filter</span>
-        <span>Filter Housing</span>
-        <span>Strainer</span>
-        <span>Engineering Solutions</span>
-        <span>Installation Work</span>
-      </div>
+        <h2>เว็บไซต์ของเรากำลังอยู่ระหว่างการพัฒนา</h2>
+        <p class="subtitle">เพื่อมอบข้อมูลผลิตภัณฑ์และบริการที่ครบถ้วนยิ่งขึ้นสำหรับคุณ</p>
 
-      <div class="contact">
-        <p>สอบถามข้อมูลหรือขอใบเสนอราคา</p>
-        <a href="mailto:sales@jat-en.com">sales@jat-en.com</a>
+        <section class="offerings" aria-labelledby="offerings-title">
+          <h3 id="offerings-title">ผลิตภัณฑ์และบริการของเรา</h3>
+
+          <div class="offering-grid">
+            <article>
+              <span class="number">01</span>
+              <h4>Sintered Filter</h4>
+            </article>
+
+            <article>
+              <span class="number">02</span>
+              <h4>Filter Housing</h4>
+            </article>
+
+            <article>
+              <span class="number">03</span>
+              <h4>Basket Strainer</h4>
+            </article>
+
+            <article>
+              <span class="number">04</span>
+              <h4>Engineering Solutions</h4>
+            </article>
+
+            <article>
+              <span class="number">05</span>
+              <h4>Installation Work</h4>
+            </article>
+          </div>
+        </section>
+
+        <section class="contact" aria-label="ข้อมูลติดต่อ">
+          <a href="mailto:sales@jat-en.com">
+            <span class="contact-icon" aria-hidden="true">✉</span>
+            <span>sales@jat-en.com</span>
+          </a>
+
+          <a href="https://www.jat-en.com" aria-label="เว็บไซต์ J.A. Tech Entaneer">
+            <span class="contact-icon" aria-hidden="true">◎</span>
+            <span>www.jat-en.com</span>
+          </a>
+
+          <a href="tel:0655281599">
+            <span class="contact-icon" aria-hidden="true">☎</span>
+            <span>065-528-1599</span>
+          </a>
+        </section>
       </div>
     </section>
+
+    <footer>
+      © <span id="year"></span> J.A. Tech Entaneer Co., Ltd. All Rights Reserved.
+    </footer>
   </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
