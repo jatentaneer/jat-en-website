@@ -547,7 +547,7 @@ h1, h2, h3,
 }
 
 .hero h1 {
-  font-size: 35px;      /* H1 : 40–48px ตาม Type Scale */
+  font-size: 40px;      /* H1 : 40–48px ตาม Type Scale */
   font-weight: 700;
 }
 
