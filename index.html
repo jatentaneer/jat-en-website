@@ -1,83 +1,287 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="J.A. Tech Entaneer Co., Ltd. — เว็บไซต์กำลังอยู่ระหว่างการพัฒนา" />
-  <meta name="theme-color" content="#073466" />
-  <title>J.A. Tech Entaneer | Coming Soon</title>
-  <style>
-    * { box-sizing: border-box; }
-    html, body { margin: 0; min-height: 100%; }
-    body {
-      background: #073466;
-      font-family: Arial, "Noto Sans Thai", sans-serif;
-    }
-    main {
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      background: #dcecf8;
-      overflow: hidden;
-    }
-    img {
-      display: block;
-      width: 100%;
-      height: 100vh;
-      object-fit: contain;
-      object-position: center;
-    }
-    .mobile-actions {
-      display: none;
-    }
-    @media (max-width: 900px) {
-      main {
-        align-content: start;
-        min-height: 100svh;
-        overflow: auto;
-        padding-bottom: 76px;
-      }
-      img {
-        width: 100%;
-        height: auto;
-        min-height: 0;
-      }
-      .mobile-actions {
-        position: fixed;
-        left: 14px;
-        right: 14px;
-        bottom: 12px;
-        z-index: 10;
-        display: flex;
-        gap: 10px;
-      }
-      .mobile-actions a {
-        flex: 1;
-        min-height: 46px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0 12px;
-        border-radius: 999px;
-        background: rgba(5, 48, 91, 0.96);
-        color: white;
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 14px;
-        border: 1px solid rgba(255,255,255,.4);
-        box-shadow: 0 8px 22px rgba(0,0,0,.18);
-      }
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ชื่อที่แสดงบนแท็บเบราว์เซอร์ และผลค้นหา Google -->
+  <title>J.A. Tech Entaneer | ฟิลเตอร์อุตสาหกรรมและงานวิศวกรรม</title>
+
+  <!-- คำอธิบายเว็บไซต์สำหรับ Google (สำคัญต่อ SEO) -->
+  <meta name="description" content="ออกแบบและผลิตฟิลเตอร์อุตสาหกรรม Sintered Filter, Filter Housing, Inline Filter, Basket Strainer พร้อมงานออกแบบวิศวกรรม ติดตั้ง และให้คำปรึกษา — มากกว่าฟิลเตอร์ คือวิศวกรรมที่เข้าใจคุณ">
+
+  <!-- เรียกใช้ไฟล์ตกแต่งหน้าตา (CSS) จากโฟลเดอร์ css -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" href="images/favicon.png">
 </head>
 <body>
-  <main>
-    <img src="./background.png" alt="J.A. Tech Entaneer Coming Soon" />
-  </main>
 
-  <nav class="mobile-actions" aria-label="ช่องทางติดต่อ">
-    <a href="mailto:sales@jat-en.com">ส่งอีเมล</a>
-    <a href="tel:0655281599">โทร 065-528-1599</a>
-  </nav>
+  <!-- ============================================ -->
+  <!-- ส่วนหัวของเว็บไซต์ : โลโก้ + เมนู              -->
+  <!-- ============================================ -->
+  <header class="site-header">
+    <div class="container navbar">
+
+      <!-- โลโก้ + ชื่อบริษัท (คลิกแล้วกลับหน้าแรก) -->
+      <a href="index.html" class="brand">
+        <img src="images/logo.jpg" alt="โลโก้ J.A. Tech Entaneer" class="brand-logo">
+        <span class="brand-name">J.A. Tech Entaneer</span>
+      </a>
+
+      <!-- ปุ่มเมนูสำหรับมือถือ (ยังกดไม่ได้ จะเปิดใช้งานในขั้น JavaScript) -->
+      <button class="menu-toggle" aria-label="เปิดเมนู">☰</button>
+
+      <!-- เมนูหลัก 5 หน้า -->
+      <nav class="main-nav">
+        <a href="index.html" class="active">หน้าแรก</a>
+        <a href="pages/products.html">สินค้า</a>
+        <a href="pages/services.html">บริการ</a>
+        <a href="pages/about.html">เกี่ยวกับเรา</a>
+        <a href="pages/contact.html">ติดต่อเรา</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- ============================================ -->
+  <!-- Hero : ส่วนแรกที่ลูกค้าเห็น                    -->
+  <!-- ============================================ -->
+  <section class="hero">
+    <div class="container">
+      <p class="hero-eyebrow">Beyond the Filter — Engineering for You</p>
+      <h1>มากกว่าฟิลเตอร์ คือวิศวกรรมที่เข้าใจคุณ</h1>
+      <p class="hero-text">
+        ออกแบบและผลิตฟิลเตอร์อุตสาหกรรมคุณภาพสูง ให้ตรงกับความต้องการทุกรูปแบบ
+        พร้อมงานออกแบบวิศวกรรมครบวงจร สำหรับโรงงาน กลุ่มอุตสาหกรรมทุกประเภท
+      </p>
+      <div class="hero-buttons">
+        <a href="pages/products.html" class="btn btn-primary">ดูสินค้าของเรา</a>
+        <a href="pages/contact.html" class="btn btn-outline">ติดต่อฝ่ายขาย</a>
+      </div>
+    </div>
+  </section>
+  </section>
+<!-- ============================================ -->
+  <!-- หมวดสินค้า 5 กลุ่ม                             -->
+  <!-- ============================================ -->
+  <section class="section products">
+    <div class="container">
+
+      <h2 class="section-title">สินค้าของเรา</h2>
+      <p class="section-subtitle">
+        ฟิลเตอร์อุตสาหกรรมคุณภาพสูง ออกแบบและผลิตตามความต้องการของงาน
+      </p>
+
+      <div class="card-grid">
+
+       <div class="card">
+          <img src="images/sintered-filter-1.jpg" alt="Sintered Filter ไส้กรองตะแกรงผนึกหลายชั้น" class="card-image">
+          <div class="card-body">
+            <h3>Sintered Filter</h3>
+            <p>ไส้กรองตะแกรงผนึกหลายชั้น แข็งแรง ทนแรงดันและอุณหภูมิสูง ล้างทำความสะอาดและใช้ซ้ำได้</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="images/filter-housing-1.jpg" alt="Filter Housing ถังกรองสำหรับติดตั้งไส้กรอง" class="card-image">
+          <div class="card-body">
+            <h3>Filter Housing</h3>
+            <p>ถังกรองสำหรับติดตั้งไส้กรอง ออกแบบตามขนาดท่อและอัตราการไหลของแต่ละหน้างาน</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="images/inline-filter-1.jpg" alt="Inline Filter ฟิลเตอร์ติดตั้งในแนวเส้นท่อ" class="card-image">
+          <div class="card-body">
+            <h3>Inline Filter</h3>
+            <p>ฟิลเตอร์แบบติดตั้งในแนวเส้นท่อ กรองของไหลโดยตรงในระบบ ประหยัดพื้นที่ติดตั้ง</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="images/basket-strainer-1.jpg" alt="Basket Strainer ตะกร้ากรองในเส้นท่อ" class="card-image">
+          <div class="card-body">
+            <h3>Basket Strainer</h3>
+            <p>ตะกร้ากรองสิ่งแปลกปลอมในเส้นท่อ ป้องกันความเสียหายของปั๊มและอุปกรณ์ปลายทาง</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-image card-noimage">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <div class="card-body">
+            <h3>Disk Filter</h3>
+            <p>แผ่นกรองสำหรับงานกรองละเอียด ผลิตได้หลายขนาดและหลายระดับความละเอียด</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="images/cartridge-filter-1.jpg" alt="Cartridge Filter ไส้กรองทรงกระบอก" class="card-image">
+          <div class="card-body">
+            <h3>Cartridge Filter</h3>
+            <p>ไส้กรองทรงกระบอก เปลี่ยนง่าย รองรับการใช้งานหลากหลายในระบบกรองอุตสาหกรรม</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="images/made-to-order-1.jpg" alt="งานสั่งผลิตฟิลเตอร์ตามแบบ" class="card-image">
+          <div class="card-body">
+            <h3>Made to Order Filter</h3>
+            <p>รับออกแบบและผลิตฟิลเตอร์ตามแบบหรือตามตัวอย่าง โดยทีมวิศวกรผู้เชี่ยวชาญ</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="images/others-1.jpg" alt="งานอื่นๆ ที่เกี่ยวข้องกับระบบกรองอุตสาหกรรม" class="card-image">
+          <div class="card-body">
+            <h3>งานอื่นๆ / Others</h3>
+            <p>อุปกรณ์และงานผลิตอื่นๆ ที่เกี่ยวข้องกับระบบกรองอุตสาหกรรม สอบถามเพิ่มเติมได้ที่ฝ่ายขาย</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="section-more">
+        <a href="pages/products.html" class="btn btn-navy">ดูรายละเอียดสินค้าทั้งหมด</a>
+      </div>
+
+    </div>
+  </section>
+  <!-- ============================================ -->
+  <!-- บริการ 4 กลุ่ม (Brand Architecture)          -->
+  <!-- ============================================ -->
+  <section class="section services-home">
+    <div class="container">
+
+      <h2 class="section-title">บริการของเรา</h2>
+      <p class="section-subtitle">
+        ครบวงจรตั้งแต่ผลิต ออกแบบ ติดตั้ง จนถึงดูแลตลอดอายุการใช้งาน
+      </p>
+
+      <div class="service-grid">
+
+        <div class="service-card">
+          <span class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+          </span>
+          <h3>Filter Manufacturing</h3>
+          <p class="service-th">ผลิตฟิลเตอร์</p>
+          <p>ผลิตฟิลเตอร์คุณภาพสูงตามสเปคการใช้งานจริงของลูกค้า — ผลิตให้พอดีกับงานจริงของคุณ</p>
+        </div>
+
+        <div class="service-card">
+          <span class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+          </span>
+          <h3>Engineering Design</h3>
+          <p class="service-th">ออกแบบทางวิศวกรรม</p>
+          <p>ออกแบบระบบอุตสาหกรรมตามมาตรฐานสุขลักษณะ — ออกแบบด้วยมาตรฐานระดับยุโรป</p>
+        </div>
+
+        <div class="service-card">
+          <span class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </span>
+          <h3>Installation Service</h3>
+          <p class="service-th">งานติดตั้ง</p>
+          <p>ติดตั้งเครื่องจักรและอุปกรณ์ในโรงงานโดยทีมช่างมืออาชีพ — ติดตั้งปลอดภัย ตรงเวลา ได้มาตรฐาน</p>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+          </span>
+          <h3>Maintenance &amp; Support</h3>
+          <p class="service-th">บำรุงรักษาและบริการหลังการขาย</p>
+          <p>ดูแลเครื่องจักรในกระบวนการผลิตและบริการหลังการขาย — เคียงข้างตลอดอายุการใช้งาน</p>
+        </div>
+
+      </div>
+
+      <div class="section-more">
+        <a href="pages/services.html" class="btn btn-navy">ดูรายละเอียดบริการ</a>
+      </div>
+
+    </div>
+  <!-- ทำไมต้องเรา : Support Messages 3 ข้อ         -->
+  <!-- ============================================ -->
+  <section class="section why-us">
+    <div class="container">
+
+      <h2 class="section-title">ทำไมต้อง J.A. Tech Entaneer</h2>
+      <p class="section-subtitle">
+        เราไม่ได้ขายแค่ฟิลเตอร์ แต่คือวิศวกรรมที่เข้าใจงานของคุณ
+      </p>
+
+      <div class="why-grid">
+
+        <div class="why-item">
+          <span class="why-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          </span>
+          <h3>ผลิตให้พอดีกับงานจริงของคุณ</h3>
+          <p>ไม่ใช่ของสำเร็จรูปในสต็อก แต่ออกแบบและผลิตตามหน้างานจริง ตรงสเปคการใช้งานของแต่ละไลน์ผลิต</p>
+        </div>
+
+        <div class="why-item">
+          <span class="why-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+          </span>
+          <h3>เชี่ยวชาญมาตรฐานสุขลักษณะระดับยุโรป</h3>
+          <p>ทีมของเราผ่านการฝึกอบรมมาตรฐาน EHEDG มาตรฐานการออกแบบถูกสุขลักษณะสำหรับอุตสาหกรรมอาหาร</p>
+        </div>
+
+        <div class="why-item">
+          <span class="why-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </span>
+          <h3>ตอบไว ถึงไว เคียงข้างจนจบงาน</h3>
+          <p>ฐานผลิตในประเทศไทย ตอบกลับรวดเร็ว ส่งมอบตรงเวลา พร้อมทีมช่างที่เข้าดูแลถึงหน้างาน</p>
+        </div>
+
+      </div>
+
+      <!-- แถบ EHEDG -->
+      <div class="ehedg-band">
+        <div class="ehedg-mark">EHEDG</div>
+        <div class="ehedg-text">
+          <h3>มาตรฐานสุขลักษณะระดับยุโรป</h3>
+          <p>
+            EHEDG (European Hygienic Engineering &amp; Design Group) คือมาตรฐานการออกแบบถูกสุขลักษณะสำหรับอุตสาหกรรมอาหาร
+            ผู้ก่อตั้งของเราผ่านการฝึกอบรมตามมาตรฐานนี้ และนำมาใช้เป็นแนวทางในการออกแบบและผลิตงานทุกชิ้น
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!-- ============================================ -->
+  <!-- ส่วนท้ายของเว็บไซต์                            -->
+  <!-- ============================================ -->
+  <footer class="site-footer">
+    <div class="container">
+
+      <p class="footer-tagline">Beyond the Filter — Engineering for You</p>
+
+      <p class="footer-name">
+        <strong>บริษัท เจ.เอ. เทค เอนทาเนีย จำกัด</strong><br>
+        J.A. Tech Entaneer Co., Ltd.
+      </p>
+
+      <p>128/7 หมู่ที่ 4 ตำบลป่าสัก อำเภอเมืองลำพูน จังหวัดลำพูน 51000</p>
+
+      <p>
+        โทร: <a href="tel:0655281599">065-528-1599</a>
+        &nbsp;|&nbsp;
+        อีเมล: <a href="mailto:sales@jat-en.com">sales@jat-en.com</a>
+      </p>
+
+      <p class="copyright">© 2026 บริษัท เจ.เอ. เทค เอนทาเนีย จำกัด สงวนลิขสิทธิ์</p>
+
+    </div>
+  </footer>
+
+  <!-- เรียกใช้ไฟล์คำสั่ง JavaScript (เช่น เมนูมือถือ) -->
+  <script src="js/main.js"></script>
 </body>
 </html>
