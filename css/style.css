@@ -191,7 +191,7 @@ img { max-width: 100%; }     /* กันรูปล้นจอบนมือ
 
   .main-nav.open { display: flex; }  /* ตอนถูกสั่งเปิด (โดย JavaScript) */
 
-  .hero h1 { font-size: 28px; }
+  .hero h1 { font-size: 25px; }
   .hero { padding: 60px 0; }
 .section-title { font-size: 26px; }}
 /* ============================================
