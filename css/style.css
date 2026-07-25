@@ -797,4 +797,18 @@ h1, h2, h3,
 .ehedg-text p {
   text-align: justify;
   text-justify: inter-character;  /* เกลี่ยระหว่างตัวอักษร (Firefox รองรับ) */
+}/* ============================================
+   ปุ่มสลับภาษา TH | EN
+   ============================================ */
+.lang-switch {
+  border: 1.5px solid var(--navy);
+  border-radius: 6px;
+  font-weight: 700;
+  min-width: 42px;
+  text-align: center;
+}
+
+.lang-switch:hover {
+  background: var(--navy);
+  color: var(--white) !important;
 }
