@@ -43,8 +43,10 @@ img { max-width: 100%; }     /* กันรูปล้นจอบนมือ
 .site-header {
   background: var(--white);
   border-bottom: 1px solid #dde7f2;
-  position: sticky;          /* เมนูติดขอบบนเวลาเลื่อนหน้าจอ */
+  position: sticky;
   top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 70, 130, 0.06);
 }
 
 .navbar {
