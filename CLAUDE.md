@@ -119,7 +119,7 @@ footer มีบรรทัด Tagline (class="footer-tagline") อยู่ �
 - อีเมล: sales@jat-en.com
 - LINE: @844grvis (ลิงก์ https://line.me/R/ti/p/@844grvis)
 - Facebook: https://www.facebook.com/profile.php?id=61591400297939
-- Google Maps: https://maps.app.goo.gl/pnWfmge7c5DZkszd6
+- Google Maps: https://maps.app.goo.gl/QAvPvqw9hiEGKjkTA
 - ที่อยู่: 128/7 หมู่ที่ 4 ตำบลป่าสัก อำเภอเมืองลำพูน จังหวัดลำพูน 51000
 - เวลาทำการ: จันทร์–ศุกร์ 8:00–17:00
 
@@ -140,6 +140,8 @@ footer มีบรรทัด Tagline (class="footer-tagline") อยู่ �
 4. Maintenance & Support — บำรุงรักษาและบริการหลังการขาย
 
 ## วิธีทำงาน (workflow)
+เงื่อนไขจากเจ้าของ: ก่อน Push ทุกครั้ง ต้องสรุปสิ่งที่แก้และรอเจ้าของอนุญาตก่อนเสมอ และใส่ข้อความอธิบายการเปลี่ยนแปลงใน Commit ทุกครั้ง
+
 1. แก้ไฟล์ในโฟลเดอร์นี้
 2. ทดสอบด้วย Live Server ในเครื่องก่อน
 3. Commit + Push ผ่าน Git → Vercel สร้างเว็บใหม่อัตโนมัติใน 1-2 นาที
