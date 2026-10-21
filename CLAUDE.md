@@ -19,7 +19,8 @@
 ```
 jat-en-website/
 ├── index.html              หน้าแรกไทย
-├── maintenance.html        หน้าปิดปรับปรุง (สำรอง ไม่ใช้ปกติ)
+├── maintenance.html        หน้าปิดปรับปรุง (สำรอง ไม่ใช้ปกติ มี noindex กัน Google เก็บ)
+├── background.png          รูปของ maintenance.html (ห้ามลบ ไม่งั้นหน้าสำรองพัง)
 ├── css/style.css           ไฟล์ตกแต่งเดียว ใช้ร่วมทุกหน้า (ทั้งไทยและอังกฤษ)
 ├── js/main.js              เมนูมือถือ
 ├── images/                 โลโก้ favicon รูปสินค้า รูปงาน
@@ -63,11 +64,12 @@ jat-en-website/
 
 ## กฎเหล็ก (เรียนรู้มาด้วยความยากลำบาก — ห้ามพลาดซ้ำ)
 
-### 1. ลิงก์ต้องขึ้นต้นด้วย / เสมอ (สำคัญที่สุด)
-เพราะ vercel.json ตั้ง `cleanUrls: true` (ตัด .html ออกจาก URL) การเขียนลิงก์แบบชื่อไฟล์เฉย ๆ จะทำให้เกิด 404 บนเว็บจริง (แต่ไม่เจอตอนทดสอบ Live Server)
+### 1. ลิงก์ที่เขียนใหม่ ให้ขึ้นต้นด้วย / (สำคัญที่สุด)
+เพราะ vercel.json ตั้ง `cleanUrls: true` (ตัด .html ออกจาก URL) การเขียนลิงก์แบบชื่อไฟล์เฉย ๆ อาจทำให้เกิด 404 บนเว็บจริง (แต่ไม่เจอตอนทดสอบ Live Server)
 - หน้าไทย: `/pages/products`, `/pages/contact`, หน้าแรก `/`
-- หน้าอังกฤษ: `/en/products`, `/en/contact`, หน้าแรก `/en/index.html`
+- หน้าอังกฤษ: `/en/products`, `/en/contact`, หน้าแรก `/en` (เว็บจริง redirect `/en/index.html` ไป `/en` จึงใช้ `/en` ใน sitemap, hreflang, canonical และลิงก์)
 - ยกเว้น (ไม่ต้องแตะ): `tel:` `mailto:` และลิงก์ภายนอก (Google Maps, Facebook, LINE)
+- หมายเหตุ: เมนูหลักเดิมในหน้า pages/ และ en/ (นอกจากหน้าแรก) ใช้ลิงก์แบบสัมพัทธ์ เช่น `products.html`, `../en/products.html` ซึ่งทำงานได้ปกติบนเว็บจริง (ตรวจแล้ว) ไม่ต้องแก้ให้ตรงกฎนี้ ใช้กฎนี้เฉพาะลิงก์ที่เพิ่มใหม่
 
 ### 2. เส้นทางไฟล์ในโฟลเดอร์ย่อย
 ไฟล์ใน pages/ และ en/ อยู่ลึก 1 ชั้น ต้องใช้ `../` เรียกของนอกโฟลเดอร์
@@ -80,11 +82,14 @@ jat-en-website/
 
 ### 4. ระบบ 2 ภาษาต้องสมมาตร
 แก้อะไรในหน้าไทย ต้องแก้หน้าอังกฤษคู่กันด้วย และมีปุ่มสลับภาษา (lang-switch) ที่ชี้ไปหน้าเดียวกันของอีกภาษา รวมถึง hreflang ใน <head>
-ตัวอย่าง hreflang (หน้าแรกใช้ /en/index.html ส่วนหน้าอื่นใช้แบบไม่มี .html):
+ทุกหน้ามี canonical (ชี้ตัวเอง) + hreflang th/en + x-default (ชี้หน้าไทย) หน้าแรกอังกฤษใช้ `/en` ส่วนหน้าอื่นใช้แบบไม่มี .html ตัวอย่าง (หน้า products ภาษาไทย):
 ```html
+<link rel="canonical" href="https://www.jat-en.com/pages/products">
 <link rel="alternate" hreflang="th" href="https://www.jat-en.com/pages/products">
 <link rel="alternate" hreflang="en" href="https://www.jat-en.com/en/products">
+<link rel="alternate" hreflang="x-default" href="https://www.jat-en.com/pages/products">
 ```
+หน้าใหม่ต้องเพิ่มใน sitemap.xml ด้วย
 
 ### 5. footer ซ้ำในทุกไฟล์
 เป็นข้อจำกัดของ HTML ธรรมดา แก้ footer ต้องแก้ทั้ง 10 ไฟล์
@@ -103,7 +108,7 @@ footer มีบรรทัด Tagline (class="footer-tagline") อยู่ �
 - สีรอง (--blue): #1482BE JA Sky Blue
 - พื้นอ่อน (--light-blue): #E8F2F9
 - สีข้อความ (--text): #404040
-- ฟอนต์หัวข้อ: Prompt / เนื้อความ: Sarabun (โหลดจาก Google Fonts ผ่าน @import บนสุดของ style.css)
+- ฟอนต์หัวข้อ: Prompt / เนื้อความ: Sarabun (โหลดจาก Google Fonts ผ่าน preconnect + `<link>` ใน `<head>` ของทุกหน้า ก่อนบรรทัด style.css — ไม่ใช้ @import ใน CSS แล้ว หน้าใหม่ต้องใส่ 3 บรรทัดนี้ด้วย)
 - ไอคอนใช้ SVG เส้น (Lucide) สีเดียว ห้ามใช้อีโมจิ
 - ตัวแปรสีอยู่ที่ :root บนสุดของ style.css
 - ข้อความจัดชิดซ้าย (ห้ามใช้ justify — ภาษาไทยจะเกิดช่องว่างกลางบรรทัด)
@@ -153,6 +158,14 @@ footer มีบรรทัด Tagline (class="footer-tagline") อยู่ �
 - เชื่อม Google Search Console + ส่ง sitemap แล้ว (Google เก็บหน้าแล้ว)
 - ปุ่ม LINE, favicon, เมนูมือถือ, sticky header ทำงานถูกต้อง
 - รูปสินค้าครบทุกกลุ่ม (รวม Disk Filter)
+- Vercel Analytics นับผู้เข้าชม (สคริปต์ `/_vercel/insights/script.js` ท้ายทุกหน้า ดูสถิติที่ vercel.com → โปรเจกต์ → Analytics) หน้าใหม่ต้องใส่สคริปต์นี้ต่อจาก main.js
+- vercel.json มี security headers (nosniff, X-Frame-Options, Referrer-Policy, Permissions-Policy) ยังไม่มี CSP
+- รูปสินค้ามี loading="lazy" (ยกเว้นโลโก้) favicon เป็นสี่เหลี่ยม 192x192
+- หน้า maintenance.html มี noindex
+
+## ข้อควรระวังเรื่องบริการ/โฮสต์
+- บัญชี Vercel (JATech) เป็นแพ็กเกจ Hobby (ฟรี) ซึ่งข้อกำหนดของ Vercel ให้ใช้ส่วนตัวที่ไม่ใช่เชิงพาณิชย์ เว็บบริษัทอาจเสี่ยงถูกระงับ — เจ้าของกำลังตัดสินใจ: อัปเกรด Pro / ย้ายโฮสต์ / อยู่แบบเดิม (ยังไม่ได้ตัดสินใจ)
+- ควรเปิด 2FA ที่ GitHub, Vercel และผู้ให้บริการโดเมน และเปิดต่ออายุโดเมนอัตโนมัติ
 
 ## งานที่เหลือ (ยังไม่ทำ)
 1. เติมสเปก/จุดเด่นแต่ละกลุ่มสินค้า (รอเจ้าของกรอกข้อมูลในแบบฟอร์ม Word แล้วเอามาลงหน้า products ทั้ง 2 ภาษา)
@@ -175,3 +188,4 @@ footer มีบรรทัด Tagline (class="footer-tagline") อยู่ �
 ## เตรียมรูปเสมอ
 รูปใหม่ทุกรูป: ตั้งชื่อภาษาอังกฤษตัวเล็ก ไม่มีเว้นวรรค (ใช้ - คั่น), ย่อที่ squoosh.app
 (ด้านยาว 1200px, MozJPEG, Quality 75), เอาเข้าโฟลเดอร์ images/
+รูปในหน้าสินค้า/การ์ดให้ใส่ `loading="lazy"` ด้วย (ยกเว้นโลโก้ในส่วนหัว)
