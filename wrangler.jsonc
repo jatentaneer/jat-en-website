@@ -1,0 +1,8 @@
+{
+  "name": "jat-en-website",
+  "compatibility_date": "2026-10-22",
+  "assets": {
+    "directory": "./",
+    "html_handling": "drop-trailing-slash"
+  }
+}

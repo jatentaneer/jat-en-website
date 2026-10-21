@@ -1,0 +1,9 @@
+.git
+.claude
+.assetsignore
+.vercelignore
+.gitattributes
+wrangler.jsonc
+vercel.json
+CLAUDE.md
+README.md
