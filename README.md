@@ -1,14 +1,68 @@
-# J.A. Tech Coming Soon
+# J.A. Tech Entaneer — เว็บไซต์บริษัท
 
-ไฟล์พร้อมอัปโหลดเข้า GitHub
+เว็บไซต์ของ บริษัท เจ.เอ. เทค เอนทาเนีย จำกัด (J.A. Tech Entaneer Co., Ltd.)
+ผู้ผลิตฟิลเตอร์อุตสาหกรรมและให้บริการงานวิศวกรรม จ.ลำพูน
 
-## อัปโหลดไฟล์ทั้งสองไว้ในระดับเดียวกัน
-- index.html
-- background.png
+เว็บจริง: https://www.jat-en.com
 
-## ขั้นตอน
-1. เข้า Repository `jat-en-website`
-2. กด Add file > Upload files
-3. อัปโหลด `index.html` และ `background.png`
-4. กด Commit changes
-5. รอ Vercel Deploy อัตโนมัติ
+> Beyond the Filter — Engineering for You
+
+## เว็บนี้ทำด้วยอะไร
+
+HTML + CSS + JavaScript ธรรมดา ไม่ใช้เฟรมเวิร์ก ไม่มีขั้นตอน build เปิดไฟล์แก้ได้ทันที
+Deploy ผ่าน [Vercel](https://vercel.com) เชื่อมกับ GitHub repo นี้ เมื่อ push ขึ้น branch `main` เว็บจะอัปเดตเองภายใน 1-2 นาที
+
+มี 2 ภาษา (ไทย/อังกฤษ) รวม 10 หน้า
+
+| หน้า | ภาษาไทย | ภาษาอังกฤษ |
+|---|---|---|
+| หน้าแรก | `/` | `/en` |
+| สินค้า | `/pages/products` | `/en/products` |
+| บริการ | `/pages/services` | `/en/services` |
+| เกี่ยวกับเรา | `/pages/about` | `/en/about` |
+| ติดต่อเรา | `/pages/contact` | `/en/contact` |
+
+## โครงสร้างโฟลเดอร์
+
+```
+index.html          หน้าแรกไทย
+pages/              หน้าย่อยภาษาไทย (products, services, about, contact)
+en/                 หน้าภาษาอังกฤษทั้งหมด
+css/style.css       ไฟล์ตกแต่งไฟล์เดียว ใช้ร่วมทุกหน้า
+js/main.js          เมนูมือถือ
+images/             โลโก้ favicon รูปสินค้า
+maintenance.html    หน้าปิดปรับปรุง (สำรอง ไม่ใช้ปกติ) ใช้คู่กับ background.png
+sitemap.xml         แผนผังเว็บสำหรับ Google
+robots.txt          ข้อกำหนดสำหรับบอทค้นหา
+vercel.json         ตั้งค่า Vercel (cleanUrls และ security headers)
+CLAUDE.md           คู่มือกฎและข้อควรระวังสำหรับผู้ดูแลเว็บ/AI ที่ช่วยแก้โค้ด
+```
+
+## ข้อควรรู้ก่อนแก้ไข
+
+- **ลิงก์:** ตั้ง `cleanUrls: true` ไว้ (URL ไม่มี `.html`) ลิงก์ที่เขียนใหม่ให้ขึ้นต้นด้วย `/` เช่น `/pages/products`
+- **2 ภาษาต้องตรงกัน:** แก้หน้าไทยแล้วต้องแก้หน้าอังกฤษคู่กันด้วย
+- **footer ซ้ำในทุกไฟล์:** แก้ข้อมูลติดต่อต้องแก้ครบทั้ง 10 ไฟล์
+- **CSS อยู่ที่เดียว:** แก้สีหรือฟอนต์ที่ `css/style.css` (สีแบรนด์อยู่ที่ `:root` ด้านบนสุด) ห้ามเขียน CSS ฝังในหน้า HTML
+- **รูปใหม่:** ตั้งชื่อภาษาอังกฤษตัวเล็ก คั่นด้วย `-` ด้านยาว 1200px ย่อก่อนนำเข้าโฟลเดอร์ `images/`
+
+รายละเอียดทั้งหมดอยู่ใน [CLAUDE.md](CLAUDE.md)
+
+## ทดสอบในเครื่อง
+
+เปิดโฟลเดอร์นี้ใน VS Code แล้วใช้ส่วนขยาย Live Server (Go Live)
+ข้อควรระวัง: Live Server ไม่จำลอง `cleanUrls` ลิงก์ที่ผิดจึงอาจไม่เห็นปัญหาในเครื่อง แต่จะ 404 บนเว็บจริง
+
+## ขั้นตอนอัปเดตเว็บ
+
+1. แก้ไฟล์ แล้วทดสอบด้วย Live Server
+2. Commit พร้อมข้อความอธิบายสิ่งที่เปลี่ยน
+3. Push ขึ้น GitHub แล้ว Vercel จะ deploy ให้อัตโนมัติ
+4. ถ้าเว็บพัง ย้อนกลับด้วย Vercel Instant Rollback หรือ `git revert`
+
+## ติดต่อ
+
+- โทร: 065-528-1599 (ฝ่ายขาย) | 053-584-699 (สำนักงาน)
+- อีเมล: sales@jat-en.com
+- LINE: @844grvis
+- ที่อยู่: 128/7 หมู่ที่ 4 ตำบลป่าสัก อำเภอเมืองลำพูน จังหวัดลำพูน 51000
