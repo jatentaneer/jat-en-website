@@ -12,8 +12,9 @@
 - เว็บบริษัท J.A. Tech Entaneer — ผู้ผลิตฟิลเตอร์อุตสาหกรรมและงานวิศวกรรม จ.ลำพูน
 - HTML + CSS + JavaScript ธรรมดา (ไม่ใช่ React/Next.js) — เลือกไว้เพราะเจ้าของดูแลเองได้ง่าย
 - 2 ภาษา (ไทย/อังกฤษ) รวม 10 หน้า
-- Deploy ผ่าน Vercel เชื่อมกับ GitHub repo: jatentaneer/jat-en-website
-- โดเมนจริง: www.jat-en.com (มี SSL อัตโนมัติจาก Vercel)
+- Deploy ผ่าน Cloudflare (Workers static assets + Workers Builds) เชื่อมกับ GitHub repo: jatentaneer/jat-en-website (ย้ายจาก Vercel เมื่อ 2026-10-29 — Vercel เก็บไว้เป็นตัวสำรองชั่วคราว)
+- โดเมนจริง: www.jat-en.com (SSL อัตโนมัติจาก Cloudflare) ส่วน jat-en.com (ไม่มี www) ถูก redirect 301 ไป www ด้วย Redirect Rule ใน Cloudflare (คงเส้นทางและพารามิเตอร์เดิม)
+- DNS จัดการที่ Cloudflare (จดโดเมนที่ GoDaddy ชี้ name server มา Cloudflare) ระเบียนอีเมล Microsoft 365, `hr`, `erp` ต้องคงเป็น DNS only ห้ามเปิด Proxied
 
 ## โครงสร้างไฟล์
 ```
@@ -38,7 +39,11 @@ jat-en-website/
 │   └── contact.html
 ├── sitemap.xml
 ├── robots.txt
-└── vercel.json             ตั้ง cleanUrls: true (สำคัญ ดูกฎด้านล่าง)
+├── wrangler.jsonc          ตั้งค่า Cloudflare (html_handling: drop-trailing-slash = URL ไม่มี .html — สำคัญ ดูกฎด้านล่าง)
+├── _headers                security headers ของ Cloudflare (nosniff, X-Frame-Options, Referrer-Policy, Permissions-Policy, HSTS)
+├── .assetsignore           รายชื่อไฟล์ที่ไม่เผยแพร่บน Cloudflare (CLAUDE.md, README.md ฯลฯ)
+├── vercel.json             ตั้งค่าเดิมของ Vercel (cleanUrls + headers) เก็บไว้เป็นตัวสำรองชั่วคราว
+└── .vercelignore           ไฟล์ที่ Vercel ไม่ต้องเผยแพร่
 ```
 
 ## ลำดับส่วนในหน้าแรก (index.html และ en/index.html) — ห้ามสลับโดยไม่ถาม
@@ -65,7 +70,7 @@ jat-en-website/
 ## กฎเหล็ก (เรียนรู้มาด้วยความยากลำบาก — ห้ามพลาดซ้ำ)
 
 ### 1. ลิงก์ที่เขียนใหม่ ให้ขึ้นต้นด้วย / (สำคัญที่สุด)
-เพราะ vercel.json ตั้ง `cleanUrls: true` (ตัด .html ออกจาก URL) การเขียนลิงก์แบบชื่อไฟล์เฉย ๆ อาจทำให้เกิด 404 บนเว็บจริง (แต่ไม่เจอตอนทดสอบ Live Server)
+เพราะเว็บตั้งให้ตัด .html ออกจาก URL (`html_handling: "drop-trailing-slash"` ใน wrangler.jsonc และ `cleanUrls: true` ใน vercel.json) การเขียนลิงก์แบบชื่อไฟล์เฉย ๆ อาจทำให้เกิด 404 บนเว็บจริง (แต่ไม่เจอตอนทดสอบ Live Server)
 - หน้าไทย: `/pages/products`, `/pages/contact`, หน้าแรก `/`
 - หน้าอังกฤษ: `/en/products`, `/en/contact`, หน้าแรก `/en` (เว็บจริง redirect `/en/index.html` ไป `/en` จึงใช้ `/en` ใน sitemap, hreflang, canonical และลิงก์)
 - ยกเว้น (ไม่ต้องแตะ): `tel:` `mailto:` และลิงก์ภายนอก (Google Maps, Facebook, LINE)
@@ -149,8 +154,8 @@ footer มีบรรทัด Tagline (class="footer-tagline") อยู่ �
 
 1. แก้ไฟล์ในโฟลเดอร์นี้
 2. ทดสอบด้วย Live Server ในเครื่องก่อน
-3. Commit + Push ผ่าน Git → Vercel สร้างเว็บใหม่อัตโนมัติใน 1-2 นาที
-4. ถ้าพัง: ย้อนกลับผ่าน Vercel Instant Rollback หรือ git revert
+3. Commit + Push ผ่าน Git → Cloudflare Workers Builds สร้างเว็บใหม่อัตโนมัติภายในไม่กี่นาที
+4. ถ้าพัง: ย้อนกลับที่ Cloudflare → Workers & Pages → jat-en-website → Deployments (rollback ไปเวอร์ชันก่อนหน้า) หรือ git revert
 
 ## สถานะปัจจุบัน (เสร็จแล้ว)
 - เว็บ 2 ภาษา 10 หน้า ครบ ใช้งานจริง
@@ -158,14 +163,16 @@ footer มีบรรทัด Tagline (class="footer-tagline") อยู่ �
 - เชื่อม Google Search Console + ส่ง sitemap แล้ว (Google เก็บหน้าแล้ว)
 - ปุ่ม LINE, favicon, เมนูมือถือ, sticky header ทำงานถูกต้อง
 - รูปสินค้าครบทุกกลุ่ม (รวม Disk Filter)
-- Vercel Analytics นับผู้เข้าชม (สคริปต์ `/_vercel/insights/script.js` ท้ายทุกหน้า ดูสถิติที่ vercel.com → โปรเจกต์ → Analytics) หน้าใหม่ต้องใส่สคริปต์นี้ต่อจาก main.js
-- vercel.json มี security headers (nosniff, X-Frame-Options, Referrer-Policy, Permissions-Policy) ยังไม่มี CSP
+- ระบบนับผู้เข้าชม: Cloudflare Web Analytics แบบ Automatic setup (Cloudflare ฉีดสคริปต์ให้เองตอนส่งหน้าเว็บ จึง **ไม่มีสคริปต์นับสถิติในไฟล์ HTML** หน้าใหม่ไม่ต้องใส่อะไรเพิ่ม) ดูสถิติที่ Cloudflare → Observability → Analytics → Web analytics ส่วน Vercel Analytics เลิกใช้แล้ว (ลบสคริปต์ `/_vercel/insights/script.js` ออกเมื่อ 2026-10-29)
+- ไฟล์ _headers มี security headers (nosniff, X-Frame-Options, Referrer-Policy, Permissions-Policy, HSTS แบบไม่มี includeSubDomains เพราะ hr/erp เป็นโดเมนย่อยแยก) ยังไม่มี CSP (vercel.json มีชุดเดียวกัน ยกเว้น HSTS) — ถ้าแก้ headers ต้องแก้ทั้งสองไฟล์ตราบที่ยังเก็บ Vercel ไว้
 - รูปสินค้ามี loading="lazy" (ยกเว้นโลโก้) favicon เป็นสี่เหลี่ยม 192x192
 - หน้า maintenance.html มี noindex
 
 ## ข้อควรระวังเรื่องบริการ/โฮสต์
-- บัญชี Vercel (JATech) เป็นแพ็กเกจ Hobby (ฟรี) ซึ่งข้อกำหนดของ Vercel ให้ใช้ส่วนตัวที่ไม่ใช่เชิงพาณิชย์ เว็บบริษัทอาจเสี่ยงถูกระงับ — เจ้าของกำลังตัดสินใจ: อัปเกรด Pro / ย้ายโฮสต์ / อยู่แบบเดิม (ยังไม่ได้ตัดสินใจ)
-- ควรเปิด 2FA ที่ GitHub, Vercel และผู้ให้บริการโดเมน และเปิดต่ออายุโดเมนอัตโนมัติ
+- เว็บย้ายจาก Vercel Hobby (ข้อกำหนดให้ใช้ส่วนตัวที่ไม่ใช่เชิงพาณิชย์) มา Cloudflare เมื่อ 2026-10-29 โปรเจกต์ Vercel เก็บไว้เป็นตัวสำรองชั่วคราว (ไม่รับทราฟฟิกแล้ว) เมื่อมั่นใจแล้วควรลบโปรเจกต์ Vercel และเอา vercel.json / .vercelignore ออกจาก repo
+- ย้อนกลับไป Vercel (ถ้าจำเป็นฉุกเฉิน): ลบ Custom Domain `www.jat-en.com` ออกจาก Worker, แล้วที่ Cloudflare DNS สร้าง CNAME `www` → `jat-en.com` (DNS only) และแก้ A ของ `jat-en.com` เป็น `216.198.79.1` (DNS only) + ปิดกฎ redirect
+- ควรเปิด 2FA ที่ GitHub, Cloudflare และ GoDaddy และเปิดต่ออายุโดเมนอัตโนมัติ (โดเมนหมดอายุ 2028-02-26)
+- อีเมลบริษัทใช้ Microsoft 365 (SPF มีแล้ว) ส่วน DKIM และ DMARC ยังไม่ได้ตั้ง — เป็นงานที่ต้องทำต่อ
 
 ## งานที่เหลือ (ยังไม่ทำ)
 1. เติมสเปก/จุดเด่นแต่ละกลุ่มสินค้า (รอเจ้าของกรอกข้อมูลในแบบฟอร์ม Word แล้วเอามาลงหน้า products ทั้ง 2 ภาษา)
