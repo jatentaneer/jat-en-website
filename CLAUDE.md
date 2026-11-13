@@ -165,6 +165,7 @@ footer มีบรรทัด Tagline (class="footer-tagline") อยู่ �
 - รูปสินค้าครบทุกกลุ่ม (รวม Disk Filter)
 - ระบบนับผู้เข้าชม: Cloudflare Web Analytics แบบ Automatic setup (Cloudflare ฉีดสคริปต์ให้เองตอนส่งหน้าเว็บ จึง **ไม่มีสคริปต์นับสถิติในไฟล์ HTML** หน้าใหม่ไม่ต้องใส่อะไรเพิ่ม) ดูสถิติที่ Cloudflare → Observability → Analytics → Web analytics ส่วน Vercel Analytics เลิกใช้แล้ว (ลบสคริปต์ `/_vercel/insights/script.js` ออกเมื่อ 2026-10-29)
 - ไฟล์ _headers มี security headers (nosniff, X-Frame-Options, Referrer-Policy, Permissions-Policy, HSTS แบบไม่มี includeSubDomains เพราะ hr/erp เป็นโดเมนย่อยแยก) ยังไม่มี CSP (vercel.json มีชุดเดียวกัน ยกเว้น HSTS) — ถ้าแก้ headers ต้องแก้ทั้งสองไฟล์ตราบที่ยังเก็บ Vercel ไว้
+- ภาพพรีวิวตอนแชร์ลิงก์ (Open Graph): ทุกหน้ามีแท็ก og:* + twitter:card ท้าย `<head>` ใช้ภาพเดียวกัน `images/og-image.jpg` (1200x630 โลโก้ + ข้อความ + รูป cartridge-filter-2) og:title/og:description/og:url ต้องตรงกับ title/description/canonical ของหน้านั้น — หน้าใหม่ต้องใส่ชุดนี้ด้วย ถ้าแก้ title/description ให้แก้ og: คู่กัน
 - รูปสินค้ามี loading="lazy" (ยกเว้นโลโก้) favicon เป็นสี่เหลี่ยม 192x192
 - หน้า maintenance.html มี noindex
 
@@ -172,7 +173,7 @@ footer มีบรรทัด Tagline (class="footer-tagline") อยู่ �
 - เว็บย้ายจาก Vercel Hobby (ข้อกำหนดให้ใช้ส่วนตัวที่ไม่ใช่เชิงพาณิชย์) มา Cloudflare เมื่อ 2026-10-29 โปรเจกต์ Vercel เก็บไว้เป็นตัวสำรองชั่วคราว (ไม่รับทราฟฟิกแล้ว) เมื่อมั่นใจแล้วควรลบโปรเจกต์ Vercel และเอา vercel.json / .vercelignore ออกจาก repo
 - ย้อนกลับไป Vercel (ถ้าจำเป็นฉุกเฉิน): ลบ Custom Domain `www.jat-en.com` ออกจาก Worker, แล้วที่ Cloudflare DNS สร้าง CNAME `www` → `jat-en.com` (DNS only) และแก้ A ของ `jat-en.com` เป็น `216.198.79.1` (DNS only) + ปิดกฎ redirect
 - ควรเปิด 2FA ที่ GitHub, Cloudflare และ GoDaddy และเปิดต่ออายุโดเมนอัตโนมัติ (โดเมนหมดอายุ 2028-02-26)
-- อีเมลบริษัทใช้ Microsoft 365 (SPF มีแล้ว) ส่วน DKIM และ DMARC ยังไม่ได้ตั้ง — เป็นงานที่ต้องทำต่อ
+- อีเมลบริษัทใช้ Microsoft 365 มี SPF (`-all`), DKIM (CNAME selector1/selector2._domainkey, DNS only) และ DMARC (`p=none` รายงานเข้า Cloudflare → Email → DMARC Management) ครบแล้วเมื่อ 2026-10-29 — ทดสอบส่งเข้า Gmail ผ่านทั้ง 3 อย่าง งานต่อไป: ดูรายงานแล้วค่อยปรับเป็น `quarantine` (เช็กก่อนว่าระบบ HR ส่งอีเมลในชื่อ @jat-en.com หรือไม่)
 
 ## งานที่เหลือ (ยังไม่ทำ)
 1. เติมสเปก/จุดเด่นแต่ละกลุ่มสินค้า (รอเจ้าของกรอกข้อมูลในแบบฟอร์ม Word แล้วเอามาลงหน้า products ทั้ง 2 ภาษา)
@@ -187,10 +188,9 @@ footer มีบรรทัด Tagline (class="footer-tagline") อยู่ �
    - work-watertreatment-1.jpg → งานปรับปรุงระบบน้ำ Water Treatment / Water treatment system improvement
    - work-welding-1.jpg → เชื่อมท่อรอยรั่ว Plate Heat Exchanger / Plate heat exchanger leak welding
    - work-modify-1.jpg → โมดิฟายที่วางปั๊มสารเคมีและที่ยึดแนวท่อสแตนเลส / Modification of chemical pump mounts and stainless pipe supports
-3. ภาพพรีวิวตอนแชร์ลิงก์ LINE/Facebook (Open Graph meta tags + รูป og-image)
-4. Catalogue PDF ให้ดาวน์โหลด (ไฟล์ไปไว้ในโฟลเดอร์ files/)
-5. SEO ระยะยาว: แยกหน้าสินค้าทีละกลุ่ม (ทำเมื่อข้อมูลสเปกพร้อม), ลงไดเรกทอรีธุรกิจไทย
-6. รอ Google Business Profile ยืนยันผ่าน (ส่งวิดีโอแล้ว รอผล)
+3. Catalogue PDF ให้ดาวน์โหลด (ไฟล์ไปไว้ในโฟลเดอร์ files/)
+4. SEO ระยะยาว: แยกหน้าสินค้าทีละกลุ่ม (ทำเมื่อข้อมูลสเปกพร้อม), ลงไดเรกทอรีธุรกิจไทย
+5. รอ Google Business Profile ยืนยันผ่าน (ส่งวิดีโอแล้ว รอผล)
 
 ## เตรียมรูปเสมอ
 รูปใหม่ทุกรูป: ตั้งชื่อภาษาอังกฤษตัวเล็ก ไม่มีเว้นวรรค (ใช้ - คั่น), ย่อที่ squoosh.app
