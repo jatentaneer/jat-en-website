@@ -20,6 +20,7 @@
 ```
 jat-en-website/
 ├── index.html              หน้าแรกไทย
+├── 404.html                หน้า "ไม่พบหน้า" ภาษาไทย (Cloudflare ส่งให้อัตโนมัติ — ดูหมายเหตุหน้า 404 ด้านล่าง)
 ├── maintenance.html        หน้าปิดปรับปรุง (สำรอง ไม่ใช้ปกติ มี noindex กัน Google เก็บ)
 ├── background.png          รูปของ maintenance.html (ห้ามลบ ไม่งั้นหน้าสำรองพัง)
 ├── css/style.css           ไฟล์ตกแต่งเดียว ใช้ร่วมทุกหน้า (ทั้งไทยและอังกฤษ)
@@ -32,6 +33,7 @@ jat-en-website/
 │   ├── about.html
 │   └── contact.html
 ├── en/                     หน้าภาษาอังกฤษทั้งหมด
+│   ├── 404.html            หน้า "ไม่พบหน้า" ภาษาอังกฤษ (ใช้เมื่อลิงก์ผิดอยู่ใต้ /en/)
 │   ├── index.html
 │   ├── products.html
 │   ├── services.html
@@ -39,7 +41,7 @@ jat-en-website/
 │   └── contact.html
 ├── sitemap.xml
 ├── robots.txt
-├── wrangler.jsonc          ตั้งค่า Cloudflare (html_handling: drop-trailing-slash = URL ไม่มี .html — สำคัญ ดูกฎด้านล่าง)
+├── wrangler.jsonc          ตั้งค่า Cloudflare (html_handling: drop-trailing-slash = URL ไม่มี .html — สำคัญ ดูกฎด้านล่าง; not_found_handling: 404-page = ใช้ 404.html ที่ใกล้ที่สุด)
 ├── _headers                security headers ของ Cloudflare (nosniff, X-Frame-Options, Referrer-Policy, Permissions-Policy, HSTS)
 ├── .assetsignore           รายชื่อไฟล์ที่ไม่เผยแพร่บน Cloudflare (CLAUDE.md, README.md ฯลฯ)
 ├── vercel.json             ตั้งค่าเดิมของ Vercel (cleanUrls + headers) เก็บไว้เป็นตัวสำรองชั่วคราว
@@ -97,7 +99,7 @@ jat-en-website/
 หน้าใหม่ต้องเพิ่มใน sitemap.xml ด้วย
 
 ### 5. footer ซ้ำในทุกไฟล์
-เป็นข้อจำกัดของ HTML ธรรมดา แก้ footer ต้องแก้ทั้ง 10 ไฟล์
+เป็นข้อจำกัดของ HTML ธรรมดา แก้ footer ต้องแก้ทั้ง 12 ไฟล์ (10 หน้าหลัก + 404.html + en/404.html)
 footer มีบรรทัด Tagline (class="footer-tagline") อยู่ — เจ้าของเลือกเก็บไว้ ห้ามลบ
 
 ### 6. ห้ามเปลี่ยนขนาดตัวอักษรที่เจ้าของตั้งเอง
@@ -169,6 +171,7 @@ footer มีบรรทัด Tagline (class="footer-tagline") อยู่ �
 - ภาพพรีวิวตอนแชร์ลิงก์ (Open Graph): ทุกหน้ามีแท็ก og:* + twitter:card ท้าย `<head>` ใช้ภาพเดียวกัน `images/og-image.jpg` (1200x630 โลโก้ + ข้อความ + รูป cartridge-filter-2) og:title/og:description/og:url ต้องตรงกับ title/description/canonical ของหน้านั้น — หน้าใหม่ต้องใส่ชุดนี้ด้วย ถ้าแก้ title/description ให้แก้ og: คู่กัน
 - รูปสินค้ามี loading="lazy" (ยกเว้นโลโก้) favicon เป็นสี่เหลี่ยม 192x192
 - หน้า maintenance.html มี noindex
+- หน้า 404 (404.html, en/404.html): Cloudflare ส่งให้อัตโนมัติพร้อมสถานะ 404 เมื่อเปิดลิงก์ที่ไม่มีอยู่ (ลิงก์ใต้ /en/ ได้หน้าอังกฤษ ที่เหลือได้หน้าไทย) หน้านี้เปิดได้จากทุกโฟลเดอร์ จึง **ใช้ลิงก์และไฟล์แบบขึ้นต้นด้วย / ทั้งหมด** (/css/style.css, /images/logo.jpg) มี noindex และตั้งใจไม่ใส่ canonical / hreflang / Open Graph และไม่อยู่ใน sitemap — เป็นข้อยกเว้นของกฎข้อ 4
 
 ## ข้อควรระวังเรื่องบริการ/โฮสต์
 - เว็บย้ายจาก Vercel Hobby (ข้อกำหนดให้ใช้ส่วนตัวที่ไม่ใช่เชิงพาณิชย์) มา Cloudflare เมื่อ 2026-10-29 โปรเจกต์ Vercel เก็บไว้เป็นตัวสำรองชั่วคราว (ไม่รับทราฟฟิกแล้ว) เมื่อมั่นใจแล้วควรลบโปรเจกต์ Vercel และเอา vercel.json / .vercelignore ออกจาก repo
