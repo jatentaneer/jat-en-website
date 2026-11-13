@@ -12,7 +12,7 @@
 - เว็บบริษัท J.A. Tech Entaneer — ผู้ผลิตฟิลเตอร์อุตสาหกรรมและงานวิศวกรรม จ.ลำพูน
 - HTML + CSS + JavaScript ธรรมดา (ไม่ใช่ React/Next.js) — เลือกไว้เพราะเจ้าของดูแลเองได้ง่าย
 - 2 ภาษา (ไทย/อังกฤษ) รวม 10 หน้า
-- Deploy ผ่าน Cloudflare (Workers static assets + Workers Builds) เชื่อมกับ GitHub repo: jatentaneer/jat-en-website (ย้ายจาก Vercel เมื่อ 2026-10-29 — Vercel เก็บไว้เป็นตัวสำรองชั่วคราว)
+- Deploy ผ่าน Cloudflare (Workers static assets + Workers Builds) เชื่อมกับ GitHub repo: jatentaneer/jat-en-website (ย้ายจาก Vercel เมื่อ 2026-10-29 ลบโปรเจกต์ Vercel แล้วเมื่อ 2026-11-14)
 - โดเมนจริง: www.jat-en.com (SSL อัตโนมัติจาก Cloudflare) ส่วน jat-en.com (ไม่มี www) ถูก redirect 301 ไป www ด้วย Redirect Rule ใน Cloudflare (คงเส้นทางและพารามิเตอร์เดิม)
 - DNS จัดการที่ Cloudflare (จดโดเมนที่ GoDaddy ชี้ name server มา Cloudflare) ระเบียนอีเมล Microsoft 365, `hr`, `erp` ต้องคงเป็น DNS only ห้ามเปิด Proxied
 
@@ -43,9 +43,7 @@ jat-en-website/
 ├── robots.txt
 ├── wrangler.jsonc          ตั้งค่า Cloudflare (html_handling: drop-trailing-slash = URL ไม่มี .html — สำคัญ ดูกฎด้านล่าง; not_found_handling: 404-page = ใช้ 404.html ที่ใกล้ที่สุด)
 ├── _headers                security headers ของ Cloudflare (nosniff, X-Frame-Options, Referrer-Policy, Permissions-Policy, HSTS)
-├── .assetsignore           รายชื่อไฟล์ที่ไม่เผยแพร่บน Cloudflare (CLAUDE.md, README.md ฯลฯ)
-├── vercel.json             ตั้งค่าเดิมของ Vercel (cleanUrls + headers) เก็บไว้เป็นตัวสำรองชั่วคราว
-└── .vercelignore           ไฟล์ที่ Vercel ไม่ต้องเผยแพร่
+└── .assetsignore           รายชื่อไฟล์ที่ไม่เผยแพร่บน Cloudflare (CLAUDE.md, README.md ฯลฯ) — ไฟล์ใหม่ที่ไม่ใช่ส่วนของเว็บต้องเพิ่มชื่อที่นี่ ไม่งั้นจะเปิดได้สาธารณะ
 ```
 
 ## ลำดับส่วนในหน้าแรก (index.html และ en/index.html) — ห้ามสลับโดยไม่ถาม
@@ -72,7 +70,7 @@ jat-en-website/
 ## กฎเหล็ก (เรียนรู้มาด้วยความยากลำบาก — ห้ามพลาดซ้ำ)
 
 ### 1. ลิงก์ที่เขียนใหม่ ให้ขึ้นต้นด้วย / (สำคัญที่สุด)
-เพราะเว็บตั้งให้ตัด .html ออกจาก URL (`html_handling: "drop-trailing-slash"` ใน wrangler.jsonc และ `cleanUrls: true` ใน vercel.json) การเขียนลิงก์แบบชื่อไฟล์เฉย ๆ อาจทำให้เกิด 404 บนเว็บจริง (แต่ไม่เจอตอนทดสอบ Live Server)
+เพราะเว็บตั้งให้ตัด .html ออกจาก URL (`html_handling: "drop-trailing-slash"` ใน wrangler.jsonc) การเขียนลิงก์แบบชื่อไฟล์เฉย ๆ อาจทำให้เกิด 404 บนเว็บจริง (แต่ไม่เจอตอนทดสอบ Live Server)
 - หน้าไทย: `/pages/products`, `/pages/contact`, หน้าแรก `/`
 - หน้าอังกฤษ: `/en/products`, `/en/contact`, หน้าแรก `/en` (เว็บจริง redirect `/en/index.html` ไป `/en` จึงใช้ `/en` ใน sitemap, hreflang, canonical และลิงก์)
 - ยกเว้น (ไม่ต้องแตะ): `tel:` `mailto:` และลิงก์ภายนอก (Google Maps, Facebook, LINE)
@@ -167,15 +165,15 @@ footer มีบรรทัด Tagline (class="footer-tagline") อยู่ �
 - ปุ่ม LINE, favicon, เมนูมือถือ, sticky header ทำงานถูกต้อง
 - รูปสินค้าครบทุกกลุ่ม (รวม Disk Filter)
 - ระบบนับผู้เข้าชม: Cloudflare Web Analytics แบบ Automatic setup (Cloudflare ฉีดสคริปต์ให้เองตอนส่งหน้าเว็บ จึง **ไม่มีสคริปต์นับสถิติในไฟล์ HTML** หน้าใหม่ไม่ต้องใส่อะไรเพิ่ม) ดูสถิติที่ Cloudflare → Observability → Analytics → Web analytics ส่วน Vercel Analytics เลิกใช้แล้ว (ลบสคริปต์ `/_vercel/insights/script.js` ออกเมื่อ 2026-10-29)
-- ไฟล์ _headers มี security headers (nosniff, X-Frame-Options, Referrer-Policy, Permissions-Policy, HSTS แบบไม่มี includeSubDomains เพราะ hr/erp เป็นโดเมนย่อยแยก) ยังไม่มี CSP (vercel.json มีชุดเดียวกัน ยกเว้น HSTS) — ถ้าแก้ headers ต้องแก้ทั้งสองไฟล์ตราบที่ยังเก็บ Vercel ไว้
+- ไฟล์ _headers มี security headers (nosniff, X-Frame-Options, Referrer-Policy, Permissions-Policy, HSTS แบบไม่มี includeSubDomains เพราะ hr/erp เป็นโดเมนย่อยแยก) ยังไม่มี CSP
 - ภาพพรีวิวตอนแชร์ลิงก์ (Open Graph): ทุกหน้ามีแท็ก og:* + twitter:card ท้าย `<head>` ใช้ภาพเดียวกัน `images/og-image.jpg` (1200x630 โลโก้ + ข้อความ + รูป cartridge-filter-2) og:title/og:description/og:url ต้องตรงกับ title/description/canonical ของหน้านั้น — หน้าใหม่ต้องใส่ชุดนี้ด้วย ถ้าแก้ title/description ให้แก้ og: คู่กัน
 - รูปสินค้ามี loading="lazy" (ยกเว้นโลโก้) favicon เป็นสี่เหลี่ยม 192x192
 - หน้า maintenance.html มี noindex
 - หน้า 404 (404.html, en/404.html): Cloudflare ส่งให้อัตโนมัติพร้อมสถานะ 404 เมื่อเปิดลิงก์ที่ไม่มีอยู่ (ลิงก์ใต้ /en/ ได้หน้าอังกฤษ ที่เหลือได้หน้าไทย) หน้านี้เปิดได้จากทุกโฟลเดอร์ จึง **ใช้ลิงก์และไฟล์แบบขึ้นต้นด้วย / ทั้งหมด** (/css/style.css, /images/logo.jpg) มี noindex และตั้งใจไม่ใส่ canonical / hreflang / Open Graph และไม่อยู่ใน sitemap — เป็นข้อยกเว้นของกฎข้อ 4
 
 ## ข้อควรระวังเรื่องบริการ/โฮสต์
-- เว็บย้ายจาก Vercel Hobby (ข้อกำหนดให้ใช้ส่วนตัวที่ไม่ใช่เชิงพาณิชย์) มา Cloudflare เมื่อ 2026-10-29 โปรเจกต์ Vercel เก็บไว้เป็นตัวสำรองชั่วคราว (ไม่รับทราฟฟิกแล้ว) เมื่อมั่นใจแล้วควรลบโปรเจกต์ Vercel และเอา vercel.json / .vercelignore ออกจาก repo
-- ย้อนกลับไป Vercel (ถ้าจำเป็นฉุกเฉิน): ลบ Custom Domain `www.jat-en.com` ออกจาก Worker, แล้วที่ Cloudflare DNS สร้าง CNAME `www` → `jat-en.com` (DNS only) และแก้ A ของ `jat-en.com` เป็น `216.198.79.1` (DNS only) + ปิดกฎ redirect
+- เว็บย้ายจาก Vercel Hobby (ข้อกำหนดให้ใช้ส่วนตัวที่ไม่ใช่เชิงพาณิชย์) มา Cloudflare เมื่อ 2026-10-29 และลบโปรเจกต์ Vercel พร้อม vercel.json / .vercelignore แล้วเมื่อ 2026-11-14 — ตอนนี้ไม่มีโฮสต์สำรอง ถ้าเว็บพังให้ย้อนเวอร์ชันที่ Cloudflare (Deployments) หรือ git revert
+- โครงสร้างบน Cloudflare: www.jat-en.com = Custom Domain ของ Worker `jat-en-website`; jat-en.com = A `192.0.2.0` แบบ Proxied (ค่าสมมุติ) + Redirect Rule `root to www` (301 คงเส้นทางและพารามิเตอร์) — ห้ามลบระเบียน A นี้ ไม่งั้น jat-en.com จะเข้าไม่ได้
 - ควรเปิด 2FA ที่ GitHub, Cloudflare และ GoDaddy และเปิดต่ออายุโดเมนอัตโนมัติ (โดเมนหมดอายุ 2028-02-26)
 - อีเมลบริษัทใช้ Microsoft 365 มี SPF (`-all`), DKIM (CNAME selector1/selector2._domainkey, DNS only) และ DMARC (`p=none` รายงานเข้า Cloudflare → Email → DMARC Management) ครบแล้วเมื่อ 2026-10-29 — ทดสอบส่งเข้า Gmail ผ่านทั้ง 3 อย่าง งานต่อไป: ดูรายงานแล้วค่อยปรับเป็น `quarantine` (เช็กก่อนว่าระบบ HR ส่งอีเมลในชื่อ @jat-en.com หรือไม่)
 

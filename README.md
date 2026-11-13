@@ -37,9 +37,7 @@ sitemap.xml         แผนผังเว็บสำหรับ Google
 robots.txt          ข้อกำหนดสำหรับบอทค้นหา
 wrangler.jsonc      ตั้งค่า Cloudflare (URL ไม่มี .html)
 _headers            security headers ของ Cloudflare
-.assetsignore       ไฟล์ที่ไม่เผยแพร่บนเว็บ (CLAUDE.md, README.md ฯลฯ)
-vercel.json         ตั้งค่าเดิมของ Vercel เก็บไว้เป็นตัวสำรองชั่วคราว
-CLAUDE.md           คู่มือกฎและข้อควรระวังสำหรับผู้ดูแลเว็บ/AI ที่ช่วยแก้โค้ด
+.assetsignore       ไฟล์ที่ไม่เผยแพร่บนเว็บ (CLAUDE.md, README.md ฯลฯ)CLAUDE.md           คู่มือกฎและข้อควรระวังสำหรับผู้ดูแลเว็บ/AI ที่ช่วยแก้โค้ด
 ```
 
 ## ข้อควรรู้ก่อนแก้ไข
