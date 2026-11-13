@@ -132,6 +132,7 @@ footer มีบรรทัด Tagline (class="footer-tagline") อยู่ �
 - Google Maps: https://maps.app.goo.gl/QAvPvqw9hiEGKjkTA
 - ที่อยู่: 128/7 หมู่ที่ 4 ตำบลป่าสัก อำเภอเมืองลำพูน จังหวัดลำพูน 51000
 - เวลาทำการ: จันทร์–ศุกร์ 8:00–17:00
+- ข้อมูลชุดนี้ซ้ำอยู่ใน Structured data (`<script type="application/ld+json">` LocalBusiness ใน `<head>` ของ index.html และ en/index.html) — ถ้าข้อมูลติดต่อเปลี่ยน ต้องแก้ตรงนั้นด้วย (นอกเหนือจาก footer 10 ไฟล์และหน้าติดต่อเรา)
 
 ## สินค้า 8 กลุ่ม (ตามลำดับที่แสดง)
 1. Sintered Filter — ไส้กรองตะแกรงผนึกหลายชั้น
